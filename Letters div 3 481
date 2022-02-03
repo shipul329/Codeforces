@@ -1,0 +1,80 @@
+/// In this problem there are n dorms and each dorm has ai rooms and some letters are being sent to people
+/// and we want to know which dorm and which room number they belong
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+const int N = 2e5+7;
+
+int main()
+{
+    int n, q;
+    cin>>n>>q;
+  
+    ll a[N];
+
+    for(int i=1; i<=n; i++) {
+        cin>>a[i];
+        a[i] += a[i-1];
+    }
+
+    while(q--)
+    {
+        ll x;
+        cin>>x;
+        auto it= lower_bound(a, a+n, x); 
+        
+        ll pos = it - a;
+
+        ll prev = *(--it);
+      
+       cout<<pos<<" "<<x-prev<<endl;
+    }
+}
+
+//// another approach  
+
+void solve()
+{
+    ll n, k;
+    cin >> n >> k;
+ 
+    ll a[n + 1], b[k];
+ 
+    a[0] = 0;
+ 
+    for(int i=1; i<n+1; i++)
+    {
+        cin >> a[i]; /// number of dormitories
+    }
+ 
+    for(int i=0; i<k; i++)
+    {
+        cin >> b[i]; /// room numbers
+    }
+ 
+    for(int i=1; i<n+1; i++)
+    {
+        a[i] = a[i] + a[i - 1];
+    }
+ 
+    int i = 1;
+    for(int j=0; j<k; j++)
+    {
+        while (i < (n + 1))
+        {
+            if (a[i] < b[j])
+                i++;
+ 
+            if (a[i] >= b[j])
+            {
+                b[j] = b[j] - a[i - 1];
+                cout << i << " " << b[j] << '\n';
+                break;
+            }
+        }
+    }
+}
