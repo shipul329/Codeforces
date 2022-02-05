@@ -1,0 +1,86 @@
+///In this problem we are given k sequences and what we have to do -?
+/// we have to pick two of them and we have to remove one element from each of them
+/// such that the sum of these two sequences are the same 
+
+// code ...
+
+#include<bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+
+void solve()
+{
+    indexed_set os;
+
+    map<int, pair<int, int> > mp; 
+
+    int k;
+    cin >> k;
+
+    for(int i=1; i<=k; i++)
+    {
+        int n, sum=0;
+        cin >> n;
+
+        map<int, int> mp2;
+
+        for(int j=1; j<=n; j++)
+        {
+            int x;
+            cin >> x;
+
+            sum+=x;
+
+            mp2[x]=j; /// position of item
+        }
+
+        for(auto it:mp2)
+        {
+            int ok=sum - it.first;  /// it.first -> item
+
+            if(mp.find(ok)!=mp.end())
+            {
+                cout << "YES" << '\n';
+                cout << mp[ok].first << " " << mp[ok].second << '\n';
+                cout << i << " " << it.second << '\n';
+                return;
+            }
+
+            mp[ok]={i, it.second}; /// sequence index and item position
+        }
+    }
+
+    cout << "NO" << '\n';
+}
+
+int main()
+{
+    SR;
+   /* #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif */
+
+    /*int t;
+    cin >> t;
+
+    while(t--)
+    {
+        solve();
+    } */
+
+    solve();
+
+    return 0;
+}
+
+
+/* two step for recursive problem...
+   1) Design a recursive tree
+   2) <\> the problem
+*/
+
+
+/*Conceptually you should be strong
+ and have practical knowledge. */
