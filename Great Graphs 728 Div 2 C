@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    ll n;
+    cin >> n;
+
+    ll a[n];
+
+    for(ll i=0; i<n; i++)
+        cin >> a[i];
+
+    sort(a, a+n);
+
+    ll ans=0;
+
+    ll mn=0; /// minimal cost to 1 from 1 is 0. actually, this is the first node
+
+    for(ll i=1; i<n; i++)
+    {
+        ll diff=a[i]-a[i-1];  /// finding the difference
+
+        diff*=-1; /// make it negative weight
+
+        mn=(i)*diff + mn; /// counting all the occurrences by i and adding all the previous values
+
+        ans+=mn; /// then adding to the ans
+    }
+
+    ans+=a[n-1];
+
+    cout << ans << '\n';
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int t;
+    cin >> t;
+    
+    while(t--)
+    {
+        solve();
+    }
+    
+    return 0;
+}
