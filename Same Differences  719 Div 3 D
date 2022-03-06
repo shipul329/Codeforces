@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    indexed_set os;
+ 
+    ll n;
+    cin >> n;
+ 
+    ll a[n];
+ 
+    map<ll, ll> mp;
+ 
+    ll ans=0;
+ 
+    for(ll i=1; i<=n; i++)
+    {
+        cin >> a[i];
+ 
+        mp[a[i]-i]++; /// count same differences that means difference and the total number of same differences     
+    }
+ 
+    for(auto it:mp)
+    {
+        ll x=it.second;
+ 
+        ans+=(x*(x-1))/2; /// count how many pairs possible and add with ans
+    }
+ 
+    cout << ans << nn;
+}
+
+
+int main()
+{
+    int t;
+    cin >> t;
+    
+    while(t--)
+    {
+        solve()
+    }
+    
+    return 0;    
+}
