@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    indexed_set os;
+ 
+    ll n;
+    cin >> n;
+ 
+    ll a[n], sum=0;
+ 
+    vector<pair<ll, ll> > v;
+ 
+    for(ll i=0; i<n; i++)
+    {
+        cin >> a[i];
+ 
+        v.pb({a[i], i+1});
+ 
+        sum+=a[i];
+    }
+ 
+    sort(v.begin(), v.end());
+ 
+    ll cnt=1;
+ 
+    for(ll i=n-2; i>=0; i--)  /// start checking
+    {
+        sum -= v[i+1].first;
+ 
+        if(sum < v[i+1].first)  /// hare gele break korabo
+        {
+            break;
+        }
+ 
+        else cnt++;  /// jitar chance hoile count hobe
+    }
+ 
+    vector<ll>v2;
+ 
+    for(ll i=n-1; i>=n-1-cnt+1; i--)
+    {
+        v2.pb(v[i].second); /// kon postion ta win hobar chance ase
+    }                       /// tar index stored korsi now index push kortesi
+ 
+ 
+    sort(v2.begin(), v2.end());
+ 
+    cout << v2.size() << nn;  /// total number of winner
+ 
+    for(ll i=0; i<v2.size(); i++)
+    {
+        cout << v2[i] << " ";  /// position of winner
+    }
+ 
+    cout << nn;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    
+    while(t--)
+    {
+        solve()
+    }
+    
+    return 0;   
+}    
