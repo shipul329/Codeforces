@@ -1,0 +1,62 @@
+/// Problem ta hoitase eirokom amra nicher khali jayga puron kore upore jaite parbo. Topmost hight tai hobe ans. Greedy method er problem.
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    ll n, w;  /// number of blocks we have and width
+    cin >> n >> w;
+
+    multiset<ll> ms;
+
+    for(ll i=0; i<n; i++)
+    {
+        ll x;
+        cin >> x;
+
+        ms.insert(x);  /// all the elements insert in the multiset
+    }
+
+    ll upor_porjonto=1, left=w;
+
+    while(!ms.empty()) /// we will iterate over the whole multiset such that till there is some element in the multiset
+    {                  /// because we have to use all the elements
+        auto it=ms.upper_bound(left); /// whose length is treater than of first item to left amount... it means amra chaitesi choto othoba soman emn value 
+
+        if(it==ms.begin()) /// jodi eita hoy tar mane we can not put it cuz there is no such element which can fit in the given space.
+        {
+            upor_porjonto++; /// jehetu we can not put this so we will go for upper level.. its like space ache 4 but item er space value 5 tahole to jayga nai ei jonno upore pathay dibo
+            
+            left=w; /// this mean amra je notun level upore gelam eivar oikhane oi poriman jayga diye puron korbo ei karone width ager tai thaktese
+        }
+
+        else{
+            it--; /// tar mane extra space ache /// jodi first element take point na kore mane jei poriman space dorkar tar theke beshi jayga ache tar mane eikhane rakhle kono somossa nai mane point korte parbo.
+            ll val=*it; /// koto tuku extra space ache oitar man janar jonnor itarator er value take jane nitasi
+
+            left-=val; /// kototuku extra space ache oitar man paitesi
+
+            ms.erase(it);  /// jehetu man bosay dilam tai oitar hisab rakhe ditasi tai erase kore ditasi. like total space ache 10 pailam 6 tar mane 4 khali ache ekhn ei 6 er to ar dorkar nai pore abar 6 bosaile to jhamela pakabe
+        }
+    }
+
+    cout << upor_porjonto << nn;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+
+    while(t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
