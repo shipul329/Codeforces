@@ -1,0 +1,93 @@
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    indexed_set os;
+ 
+    ll n, m;
+    cin >> n >> m;
+ 
+    ll a[n][m];
+ 
+    string s;
+ 
+    for(ll i=0; i<n; i++)
+    {
+        cin >> s;
+ 
+        for(ll j=0; j<m; j++)
+        {
+            a[i][j]=s[j]-'0';
+        }
+    }
+ 
+    if(a[0][0]==1)
+    {
+        cout << -1 << nn;  /// if first grid/cell is 1 then this is impossible to make it 1.
+        return;
+    }
+ 
+    vector<vector<ll> > v;
+ 
+ 
+    for(ll i=0; i<n; i++)  /// checking for every column
+    {
+        for(ll j=m-1; j>0; j--)  /// start from back
+        {
+            vector<ll>v2;
+ 
+            if(a[i][j]==1)
+            {
+                v2.pb(i);
+                v2.pb(j-1);
+                v2.pb(i);
+                v2.pb(j);
+                v.pb(v2);
+            }
+        }
+    }
+ 
+    for(ll i=n-1; i>=0; i--)  /// then we iterate first row
+    {
+        {
+            if(a[i][0]==1){
+            vector<ll> v3;
+                v3.pb(i-1);
+                v3.pb(0);
+                v3.pb(i);
+                v3.pb(0);
+                v.pb(v3);
+            }
+        }
+    }
+ 
+    cout << v.size() << nn;
+ 
+    for(auto &x:v)
+    {
+        for0(i, 4)
+        {
+            cout << x[i]+1 << " ";
+        }
+        cout << nn;
+    }
+}
+ 
+int32_t main()
+{
+    int t;
+    cin >> t;
+ 
+    while(t--)
+    {
+        solve();
+    }
+    
+    return 0;
+}
