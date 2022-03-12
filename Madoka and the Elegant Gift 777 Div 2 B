@@ -39,7 +39,7 @@ void solve()
         return;
     }
     
-    for(ll i=0; i<n-1; i++)  /// we don't need to check the last grid actually which is n*m th grid
+    for(ll i=0; i<n-1; i++)
     {
         for(ll j=0; j<m-1; j++)
         {
