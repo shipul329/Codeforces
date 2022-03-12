@@ -1,0 +1,79 @@
+/// A subrectangle is called black it there's no grid/cell with value 0 inside it.
+/// and A subrectangle is nice it it's black and it does not contained in another black subrectangle
+/// which mean it is independent or it does not depend on others. 
+/// let suppose with girds [ 1(a) 1(b) ]  1 1
+                    ///        [ 1(c) 0(d) ]  1 0 seems like.. so here a->b and a->c both are dependent
+                    /// if grid c is 0 then it will be independent
+                    
+/// so in this problem we have to make sure there are no dependent black subrectangle 
+/// if there is any, then ans is "NO" otherwise ans will be "YES"
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+    ll n, m;
+    cin >> n >> m;
+    
+    ll a[n][m];
+    string s;
+    
+    for(ll i=0; i<n; i++)
+    {
+        cin >> s;
+        
+        for(ll j=0; j<m; j++)
+        {
+            a[i][j]=s[j]-'0';
+        }
+    }
+    
+    if(n==1 || m==1)
+    {
+        cout << "YES" << '\n';
+        return;
+    }
+    
+    for(ll i=0; i<n-1; i++)  /// we don't need to check the last grid actually which is n*m th grid
+    {
+        for(ll j=0; j<m-1; j++)
+        {
+            ll s=0;
+            
+            s+=a[i][j];
+            s+=a[i+1][j]; /// if anything 1 1 
+            s+=a[i][j+1]; ///             1 0 like this then ans is NO
+            s+=a[i+1][j+1]; /// the reason is 1+1+1 is equal to 3
+            
+            if(s==3)
+            {
+                cout << "NO" << '\n';
+                return;
+            }
+        }
+    }
+    
+    cout << "YES" << '\n';
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int t;
+    cin >> t;
+    
+    while(t--)
+    {
+        solve();
+    }
+    
+    return 0;
+}
