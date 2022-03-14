@@ -1,0 +1,63 @@
+/// In this problem we have to find minimum operation to make a string good.
+/// where a good string is "aaaabbcd"
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define nn '\n';
+
+int ans(int left, int right, char ch, string s)
+{
+    /// think off base condition
+    
+    if(left==right)
+    return s[left]!=ch;
+    
+    int cnt_left=0, cnt_right=0;
+    
+    for(int i=left; i<=(left+right)/2; i++)
+    {
+        if(s[i]!=ch)
+        cnt_left++;
+    }
+    
+    /// count next half from (half+1 to s.size()-1 )
+    
+    int nxt_fst=ans((left+right)/2+1, right, ch+1, s); /// for next character
+    
+    for(int i=(left+right)/2+1; i<=right; i++)
+    {
+        if(s[i]!=ch)
+        cnt_right++;
+    }
+    
+    /// count from left to first half
+    
+    int befor_sn=ans(left, (left+right)/2, ch+1, s); /// for next character
+    
+    /// return minimum operation from both of them
+    
+    return min(cnt_right+befor_sn, cnt_left+nxt_fst);
+}
+
+int32_t main()
+{
+    int t;
+    cin >> t;
+    
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        
+        string s;
+        cin >> s;  /// or we can declare it globally
+        
+        int mn_operation=ans(0, s.size()-1, 'a', s);
+        
+        cout << mn_operation << nn;
+    }
+    
+    return 0;
+}
