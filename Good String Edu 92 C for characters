@@ -1,0 +1,72 @@
+/// this code for characters 
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+void solve()
+{
+      string s;
+      cin >> s;
+      
+      int ans=0;
+      
+      int n=s.size();
+      
+      for(char i=0; i<26; i++)
+      {
+            int cnt=0;
+            
+            for(auto x:s)
+            {
+                  if(x-'a'==i)
+                  cnt++;
+            }
+            
+            ans=max(ans, cnt);
+            
+            for(char j=0; j<26; j++)
+            {
+                  int cnt2=0;
+                  
+                  for(auto y:s)
+                  {
+                        if(cnt2%2==0)
+                        {
+                              if(y-'a'==i)
+                              cnt2++;
+                        }
+                        
+                        else{
+                              if(y-'a'==j)
+                              cnt2++;
+                        }
+                  }
+                  
+                  if(cnt2&1) cnt2--;
+                  
+                  ans=max(ans, cnt2);
+            }
+      }
+      
+      cout << n-ans << '\n';
+}
+
+int32_t main()
+{
+      ios_base::sync_with_stdio(0);
+      cin.tie(0);
+      cout.tie(0);
+      
+      int t;
+      cin >> t;
+      
+      while(t--)
+      {
+            solve();
+      }
+      
+      return 0;
+}
