@@ -26,7 +26,7 @@ void solve()
 
     while(!ms.empty()) /// we will iterate over the whole multiset such that till there is some element in the multiset
     {                  /// because we have to use all the elements
-        auto it=ms.upper_bound(left); /// whose length is treater than of first item to left amount... it means amra chaitesi choto othoba soman emn value 
+        auto it=ms.upper_bound(left); /// whose length is greater than of first item to left amount... it means amra chaitesi choto othoba soman emn value 
 
         if(it==ms.begin()) /// jodi eita hoy tar mane we can not put it cuz there is no such element which can fit in the given space.
         {
